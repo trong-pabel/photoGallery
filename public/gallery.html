@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Photo Gallery</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="gallery-page">
+  <header class="header">
+    <h1>📷 My Photo Gallery</h1>
+    <div class="header-actions">
+      <label for="fileInput" class="btn-upload">
+        ⬆️ Upload ảnh
+      </label>
+      <input type="file" id="fileInput" multiple accept=".jpg,.jpeg,.png,.heic,.heif" hidden>
+      <button id="logoutBtn" class="btn-logout">Đăng xuất</button>
+    </div>
+  </header>
+  
+  <div id="uploadProgress" class="upload-progress hidden">
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+    <span class="progress-text">Đang upload...</span>
+  </div>
+  
+  <main class="gallery-container">
+    <div id="gallery" class="gallery-grid">
+      <!-- Photos will be loaded here -->
+    </div>
+    
+    <div id="emptyState" class="empty-state hidden">
+      <p>📷 Chưa có ảnh nào</p>
+      <p>Nhấn "Upload ảnh" để bắt đầu</p>
+    </div>
+  </main>
+  
+  <script src="js/gallery.js"></script>
+</body>
+</html>

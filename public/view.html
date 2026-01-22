@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xem ảnh - Photo Gallery</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="view-page">
+  <div class="view-container">
+    <div class="view-header">
+      <a href="gallery.html" class="btn-back">← Quay lại Gallery</a>
+      <div class="view-actions">
+        <button id="deleteBtn" class="btn-delete">🗑️ Xóa</button>
+        <a id="downloadBtn" class="btn-download" download>⬇️ Tải xuống</a>
+      </div>
+    </div>
+    
+    <div class="image-wrapper">
+      <img id="fullImage" src="" alt="Full size image">
+    </div>
+    
+    <div class="image-info">
+      <span id="photoDate"></span>
+      <span id="photoSize"></span>
+    </div>
+  </div>
+  
+  <script src="js/view.js"></script>
+</body>
+</html>
