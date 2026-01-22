@@ -10,20 +10,9 @@
   <header class="header">
     <h1>📷 My Photo Gallery</h1>
     <div class="header-actions">
-      <label for="fileInput" class="btn-upload">
-        ⬆️ Upload ảnh
-      </label>
-      <input type="file" id="fileInput" multiple accept=".jpg,.jpeg,.png,.heic,.heif" hidden>
       <button id="logoutBtn" class="btn-logout">Đăng xuất</button>
     </div>
   </header>
-  
-  <div id="uploadProgress" class="upload-progress hidden">
-    <div class="progress-bar">
-      <div class="progress-fill"></div>
-    </div>
-    <span class="progress-text">Đang upload...</span>
-  </div>
   
   <main class="gallery-container">
     <div id="gallery" class="gallery-grid">
@@ -32,7 +21,11 @@
     
     <div id="emptyState" class="empty-state hidden">
       <p>📷 Chưa có ảnh nào</p>
-      <p>Nhấn "Upload ảnh" để bắt đầu</p>
+      <p>Thêm ảnh vào thư mục uploads/ và cập nhật photos.json</p>
+    </div>
+    
+    <div id="loadingState" class="loading-state">
+      <p>Đang tải ảnh...</p>
     </div>
   </main>
   

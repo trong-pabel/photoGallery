@@ -1,4 +1,8 @@
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
+// Hardcoded credentials (client-side only, NOT secure)
+const VALID_USERNAME = 'admin';
+const VALID_PASSWORD = '789878';
+
+document.getElementById('loginForm').addEventListener('submit', function(e) {
   e.preventDefault();
   
   const username = document.getElementById('username').value.trim();
@@ -7,21 +11,10 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
   
   errorEl.textContent = '';
   
-  try {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    });
-    
-    const data = await response.json();
-    
-    if (data.success) {
-      window.location.href = 'gallery.html';
-    } else {
-      errorEl.textContent = data.message || 'Đăng nhập thất bại';
-    }
-  } catch (error) {
-    errorEl.textContent = 'Lỗi kết nối server';
+  if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+    // Redirect to gallery on success
+    window.location.href = 'gallery.html';
+  } else {
+    errorEl.textContent = 'Sai tên đăng nhập hoặc mật khẩu';
   }
 });

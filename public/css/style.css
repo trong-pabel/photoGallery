@@ -9,7 +9,6 @@
   --primary: #2563eb;
   --primary-hover: #1d4ed8;
   --danger: #dc2626;
-  --danger-hover: #b91c1c;
   --bg-dark: #0f172a;
   --bg-card: #1e293b;
   --text-primary: #f8fafc;
@@ -121,6 +120,7 @@ body {
 .gallery-page {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .header {
@@ -144,29 +144,12 @@ body {
   gap: 12px;
 }
 
-.btn-upload, .btn-logout {
+.btn-logout {
   padding: 10px 20px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.btn-upload {
-  background: var(--primary);
-  color: white;
-  border: none;
-}
-
-.btn-upload:hover {
-  background: var(--primary-hover);
-}
-
-.btn-logout {
   background: transparent;
   color: var(--text-secondary);
   border: 1px solid var(--border-color);
@@ -175,42 +158,6 @@ body {
 .btn-logout:hover {
   background: var(--bg-dark);
   color: var(--text-primary);
-}
-
-.upload-progress {
-  padding: 16px 24px;
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.upload-progress.hidden {
-  display: none;
-}
-
-.progress-bar {
-  height: 6px;
-  background: var(--bg-dark);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 8px;
-}
-
-.progress-fill {
-  height: 100%;
-  background: var(--primary);
-  width: 0%;
-  transition: width 0.3s;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
-}
-
-.progress-text {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
 }
 
 .gallery-container {
@@ -260,23 +207,33 @@ body {
   opacity: 1;
 }
 
-.photo-overlay span {
+.photo-overlay .photo-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.photo-overlay .photo-date {
   font-size: 0.75rem;
   color: var(--text-secondary);
 }
 
-.empty-state {
+.empty-state,
+.loading-state {
   text-align: center;
   padding: 80px 20px;
   color: var(--text-secondary);
 }
 
-.empty-state.hidden {
+.empty-state.hidden,
+.loading-state.hidden {
   display: none;
 }
 
-.empty-state p:first-child {
-  font-size: 3rem;
+.empty-state p:first-child,
+.loading-state p {
+  font-size: 1.5rem;
   margin-bottom: 16px;
 }
 
@@ -320,27 +277,13 @@ body {
   gap: 12px;
 }
 
-.btn-delete, .btn-download {
+.btn-download {
   padding: 10px 16px;
   border-radius: 8px;
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s;
-}
-
-.btn-delete {
-  background: transparent;
-  color: var(--danger);
-  border: 1px solid var(--danger);
-}
-
-.btn-delete:hover {
-  background: var(--danger);
-  color: white;
-}
-
-.btn-download {
   background: var(--primary);
   color: white;
   border: none;
@@ -402,4 +345,11 @@ body {
   .login-box {
     padding: 24px;
   }
+  
+  .image-info {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
 }
+/* End of file */

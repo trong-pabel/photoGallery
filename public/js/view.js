@@ -5,58 +5,47 @@ if (!filename) {
   window.location.href = 'gallery.html';
 }
 
+const decodedFilename = decodeURIComponent(filename);
 const fullImageEl = document.getElementById('fullImage');
 const downloadBtn = document.getElementById('downloadBtn');
-const deleteBtn = document.getElementById('deleteBtn');
+const photoTitleEl = document.getElementById('photoTitle');
 const photoDateEl = document.getElementById('photoDate');
-const photoSizeEl = document.getElementById('photoSize');
 
-// Load image
-fullImageEl.src = `/uploads/${filename}`;
-downloadBtn.href = `/uploads/${filename}`;
+// Set image source
+fullImageEl.src = 'uploads/' + decodedFilename;
+fullImageEl.alt = decodedFilename;
+downloadBtn.href = 'uploads/' + decodedFilename;
+downloadBtn.download = decodedFilename;
 
-// Load photo info
+// Load photo info from photos.json
 loadPhotoInfo();
 
 async function loadPhotoInfo() {
   try {
-    const response = await fetch('/api/photos');
-    const data = await response.json();
+    const response = await fetch('uploads/photos.json');
     
-    if (data.success) {
-      const photo = data.photos.find(p => p.filename === filename);
+    if (!response.ok) {
+      throw new Error('Could not load photos.json');
+    }
+    
+    const photos = await response.json();
+    const photo = photos.find(function(p) {
+      return p.file === decodedFilename;
+    });
+    
+    if (photo) {
+      const title = photo.title || photo.file;
+      photoTitleEl.textContent = '📷 ' + title;
       
-      if (photo) {
-        const date = new Date(photo.photoDate);
-        photoDateEl.textContent = `📅 ${date.toLocaleDateString('vi-VN')} ${date.toLocaleTimeString('vi-VN')}`;
-        
-        const sizeMB = (photo.size / (1024 * 1024)).toFixed(2);
-        photoSizeEl.textContent = `📦 ${sizeMB} MB`;
-      }
+      const date = new Date(photo.date);
+      photoDateEl.textContent = '📅 ' + date.toLocaleDateString('vi-VN') + ' ' + date.toLocaleTimeString('vi-VN');
+    } else {
+      photoTitleEl.textContent = '📷 ' + decodedFilename;
+      photoDateEl.textContent = '';
     }
   } catch (error) {
     console.error('Error loading photo info:', error);
+    photoTitleEl.textContent = '📷 ' + decodedFilename;
+    photoDateEl.textContent = '';
   }
 }
-
-// Delete handler
-deleteBtn.addEventListener('click', async () => {
-  if (!confirm('Bạn có chắc muốn xóa ảnh này?')) return;
-  
-  try {
-    const response = await fetch(`/api/photos/${encodeURIComponent(filename)}`, {
-      method: 'DELETE'
-    });
-    
-    const data = await response.json();
-    
-    if (data.success) {
-      alert('Đã xóa ảnh!');
-      window.location.href = 'gallery.html';
-    } else {
-      alert('Lỗi: ' + data.message);
-    }
-  } catch (error) {
-    alert('Lỗi xóa ảnh: ' + error.message);
-  }
-});
